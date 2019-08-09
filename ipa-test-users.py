@@ -32,7 +32,7 @@ class TestUsers:
             first_name = full_name.split()[0]
             last_name = full_name.split()[1]
             print "Adding user: %s" % full_name
-            api.Command['user_add'](username, givenname=first_name, sn=last_name)
+            api.Command['stageuser_add'](username, givenname=first_name, sn=last_name)
             datafile.write(username + "\n")
 
         print "\nComplete.\n"
@@ -52,7 +52,7 @@ class TestUsers:
             try:
                 print "Deleting uid: %s" % user,
                 unic_user = unicode(user, "utf-8")
-                api.Command['user_del'](unic_user)
+                api.Command['stageuser_del'](unic_user)
             except errors.NotFound:
                 continue
 
