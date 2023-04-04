@@ -50,8 +50,8 @@ class TestUsers:
 
         for user in datafile:
             try:
-                print ("Deleting uid: %s" % user),
-                unic_user = unicode(user, "utf-8")
+                print ("Deleting uid: %s" % user)
+                unic_user = str(user)
                 api.Command['stageuser_del'](unic_user)
             except errors.NotFound:
                 continue
