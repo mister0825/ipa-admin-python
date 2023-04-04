@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Add and remove test IPA user accounts
 # Uses Python Fire library to generate a CLI for the TestUsers class
@@ -31,11 +31,11 @@ class TestUsers:
             username = full_name.lower().replace(" ", ".")
             first_name = full_name.split()[0]
             last_name = full_name.split()[1]
-            print "Adding user: %s" % full_name
+            print ("Adding user: %s" % full_name)
             api.Command['stageuser_add'](username, givenname=first_name, sn=last_name)
             datafile.write(username + "\n")
 
-        print "\nComplete.\n"
+        print ("\nComplete.\n")
         api.Backend.rpcclient.disconnect()
         datafile.close()
 
@@ -45,18 +45,18 @@ class TestUsers:
         try:
             datafile = open('userlist.txt', 'r')
         except IOError:
-            print "No data file found...exiting.\n"
+            print ("No data file found...exiting.\n")
             sys.exit()
 
         for user in datafile:
             try:
-                print "Deleting uid: %s" % user,
+                print ("Deleting uid: %s" % user),
                 unic_user = unicode(user, "utf-8")
                 api.Command['stageuser_del'](unic_user)
             except errors.NotFound:
                 continue
 
-        print "\nComplete.\n"
+        print ("\nComplete.\n")
         api.Backend.rpcclient.disconnect()
         datafile.close()
         os.remove("userlist.txt")
